@@ -1,6 +1,6 @@
 import React from 'react';
 
-import List from './List';
+import List from './../List';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,6 +12,7 @@ class App extends React.Component {
 
   }
 
+
   onChange=(event)=>{
     this.setState(
       {term: event.target.value}
@@ -22,8 +23,24 @@ class App extends React.Component {
     event.preventDefault();
     this.setState({
       term: '',
-      items: [...this.state.items, this.state.term]
+      items: [...this.state.items,{
+        toDo: this.state.term,
+        complete: false
+      }]
     })
+  }
+
+  onComplete=(index)=>{
+    this.setState(prevState => ({
+      items: [...prevState.items.slice(0,index),
+        {
+          toDo: prevState.items[index].toDo,
+          complete: !prevState.items[index].complete
+        },
+        ...prevState.items.slice(index+1)
+      ]
+
+    }))
   }
 
   render(){
@@ -32,7 +49,8 @@ class App extends React.Component {
         <form onSubmit={this.onSubmit}>
           <input value={this.state.term} onChange={this.onChange} />
           <button type="submit">Submit</button>
-        </form><List items={this.state.items} />
+        </form>
+        <List items={this.state.items} onComplete={this.onComplete} />
       </div>
     )
   }
