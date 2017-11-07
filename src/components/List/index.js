@@ -1,11 +1,12 @@
 import React  from 'react';
 
+import RaisedButton from 'material-ui/RaisedButton';
+
 const staticStyle = {
   padding: "10px",
-  fontStyle : "italic",
   fontWeight : "bold",
   margin : "10px",
-  borderRadius : "10px",
+  width : "160px",
 }
 
 const List =(props) => {
@@ -24,7 +25,7 @@ const List =(props) => {
     <ol>
       {props.items.map((items, index)=>
         <li key={index}>{items.toDo}
-          <button style={{...staticStyle,...style[items.complete ? "complete" : "incomplete"]}} onClick={()=>props.onComplete(index)}>{items.complete ? "Complete" : "Incomplete"}</button>
+          <RaisedButton style={{...staticStyle,...style[items.complete ? "complete" : "incomplete"]}} onClick={()=>props.onComplete(index)}>{items.complete ? "Complete" : "Incomplete"}</RaisedButton>
         </li>)}
     </ol>
   );
