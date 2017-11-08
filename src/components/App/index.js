@@ -1,6 +1,9 @@
 import React from 'react';
-
 import List from './../List';
+
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+// import DatePicker from 'material-ui/DatePicker';
 
 class App extends React.Component {
   constructor(props) {
@@ -47,9 +50,10 @@ class App extends React.Component {
     return (
       <div>
         <form onSubmit={this.onSubmit}>
-          <input value={this.state.term} onChange={this.onChange} />
-          <button type="submit">Submit</button>
+          <TextField defaultValue="Default Value" floatingLabelText="Insert List Item" value={this.state.term} onChange={this.onChange}/>
+          <RaisedButton labelColor="green" type="submit">Submit</RaisedButton>
         </form>
+        {/* <DatePicker hintText="Choose a date" mode="landscape" /> */}
         <List items={this.state.items} onComplete={this.onComplete} />
       </div>
     )
