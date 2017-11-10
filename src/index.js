@@ -16,9 +16,6 @@ const muiTheme = getMuiTheme({
     primary1Color: cyan500,
     primary2Color: cyan700,
   },
-  appBar: {
-    height: 50,
-  },
   raisedButton: {
     color: cyan700,
   }

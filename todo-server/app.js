@@ -4,12 +4,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 var index = require('./routes/index');
 var todos = require('./routes/todos');
 
 var app = express();
+
+mongoose.connect('mongodb://localhost/todolist', {useMongoClient: true})
+.then(() =>  console.log('connection successful'))
+.catch((err) => console.error(err));
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -39,8 +42,17 @@ app.use(function(err, req, res, next) {
   res.json({error: err});
 });
 
-// mongoose.connect('mongodb://localhost/todolist', {useMongoClient: true})
-//   .then(() =>  console.log('connection successful'))
-//   .catch((err) => console.error(err));
+
+// app.post('/', function(req, res) {
+//   // Insert JSON straight into MongoDB
+//   db.collection('todolist').insert(req.body, function (err, result) {
+//       if (err)
+//          res.send('Error');
+//       else
+//         res.send('Success');
+//
+//   });
+// });
+
 
 module.exports = app;

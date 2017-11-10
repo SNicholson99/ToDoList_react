@@ -1,35 +1,50 @@
-import React  from 'react';
-
-import RaisedButton from 'material-ui/RaisedButton';
+import React from 'react';
 
 const staticStyle = {
-  padding: "10px",
-  fontWeight : "bold",
-  margin : "10px",
-  width : "160px",
+  margin: '10px 50px',
 }
 
 const List =(props) => {
-  const style = {
-    complete : {
-      backgroundColor : "rgb(0, 255, 163)",
-      borderColor: "rgb(0, 255, 163)"
-    },
-    incomplete : {
-      backgroundColor : "rgb(255, 0, 0)",
-      borderColor: "rgb(255, 0, 0)",
-      color: "white",
-    }
-  };
-  return (
-    <ol>
-      {props.items.map((items, index)=>
-        <li key={index}>{items.toDo}
-          <RaisedButton style={{...staticStyle,...style[items.complete ? "complete" : "incomplete"]}} onClick={()=>props.onComplete(index)}>{items.complete ? "Complete" : "Incomplete"}</RaisedButton>
-        </li>)}
-    </ol>
-  );
-}
+const style = {
+  complete:{
+    backgroundColor: 'green',
+    color: 'white',
+  },
+  incomplete:{
+    backgroundColor: 'red',
+    color: 'white'
+  }
+};
+
+const done = {
+  complete:{
+    textDecoration: 'line-through'
+  },
+  incomplete:{
+textDecoration: 'none'
+  }
+};
+
+ return(
+      <ol>
+        {props.items.map((item, index) => (
+            <li key={index}
+              style={done[item.complete ? 'complete' : 'incomplete']}
+            >
+              {item.todo}
+              <button
+                style={{...staticStyle, ...style[item.complete ? 'complete' : 'incomplete'], ...props.styles}}
+                onClick={() => props.onComplete(index)}>{item.complete?'done':'todo'}
+              </button>
+              {/* <button onClick={() => props.onDelete(index)}>
+                Delete
+              </button> */}
+            </li>
+          )
+        )}
+      </ol>
+)};
+
 
 
 
